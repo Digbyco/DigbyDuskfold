@@ -213,6 +213,12 @@ p {
 }
 
 @media (max-width: 30rem) {
+  .status {
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    border-radius: 0.9rem;
+    line-height: 1.5;
+  }
   .nav {
     gap: 0.1rem 1rem;
   }
@@ -488,6 +494,52 @@ p {
   margin: 0;
 }
 
+/* App Store spot: coming-soon status before launch, Apple's badge after (site-config.json) */
+.store-cta {
+  margin: 1.5rem 0 0;
+}
+.store-badge {
+  display: inline-block;
+  line-height: 0;
+}
+.store-badge img {
+  height: 54px;
+  width: auto;
+}
+.closing-cta {
+  padding: clamp(3.5rem, 8vw, 5.5rem) 0;
+}
+.closing-cta .dk-mark {
+  margin: 0 auto 1.25rem;
+}
+.closing-cta h2 {
+  margin-bottom: 0;
+}
+.closing-cta .store-cta {
+  display: flex;
+  justify-content: center;
+}
+.stage-title {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+.stage-title .stage-num {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  margin-right: 0.6rem;
+  vertical-align: 0.25em;
+}
+.role {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  margin-top: -0.4rem;
+}
+.notice-title {
+  font-size: 1.4rem;
+}
+
 /* Phone screenshots */
 .phones {
   display: grid;
@@ -682,19 +734,44 @@ address {
 .site-footer {
   background: var(--forest-deep);
   color: var(--ivory-on-forest);
-  padding: 3.5rem 0 1.5rem;
+  padding: 2.5rem 0 1.25rem;
   font-size: 0.92rem;
 }
 .site-footer a {
   color: var(--ivory);
 }
+/* Phones: brand and company across the width; the two link lists side by side. */
 .footer-grid {
   display: grid;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 1.25rem;
+}
+.footer-brand,
+.footer-company {
+  grid-column: 1 / -1;
+}
+.footer-brand .tagline {
+  margin-bottom: 0;
+}
+.footer-company p {
+  margin: 0;
 }
 @media (min-width: 52rem) {
+  .site-footer {
+    padding: 3.5rem 0 1.5rem;
+  }
   .footer-grid {
     grid-template-columns: 1.3fr 0.8fr 1fr 1.3fr;
+    gap: 2rem;
+  }
+  .footer-brand,
+  .footer-company {
+    grid-column: auto;
+  }
+}
+@media (max-width: 51.99rem) {
+  .logo-footer {
+    width: 140px;
   }
 }
 .footer-brand .wordmark {
@@ -714,7 +791,7 @@ address {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--clay);
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.6rem;
 }
 .site-footer ul {
   list-style: none;
@@ -722,12 +799,16 @@ address {
   margin: 0;
 }
 .site-footer li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+.site-footer li a {
+  display: inline-block;
+  padding: 0.15rem 0;
 }
 .footer-base {
   border-top: 1px solid rgba(233, 227, 214, 0.2);
-  margin-top: 2.5rem;
-  padding-top: 1.25rem;
+  margin-top: 1.75rem;
+  padding-top: 1rem;
 }
 .footer-base p {
   margin: 0;
@@ -804,5 +885,14 @@ address {
   .site-header nav,
   .skip {
     display: none;
+  }
+}
+
+/* Smallest phones: the spaced DUSKFOLD name must fit inside its panel. */
+@media (max-width: 22.5rem) {
+  .duskfold-name {
+    font-size: 1.3rem;
+    letter-spacing: 0.26em;
+    margin-right: -0.26em;
   }
 }

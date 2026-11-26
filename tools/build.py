@@ -28,10 +28,29 @@ SEAL_IVORY = '<img class="seal" src="/assets/brand/digby-publishers-mark-ivory.p
 # The approved Duskfold mark (duskfold/assets/images/brand/duskfold-mark.svg, D-144).
 DUSKFOLD_MARK = '<img class="dk-mark" src="/assets/brand/duskfold-mark.svg" width="64" height="64" alt="" />'
 
-# The founder portrait appears when src/brand/founder-portrait.jpg is supplied (About page).
-PORTRAIT = SRC / 'brand' / 'founder-portrait.jpg'
 
 NAV_KEYS = ['home', 'products', 'about', 'contact']
+
+# Duskfold's App Store availability, in one place (src/site-config.json).
+CONFIG = __import__('json').loads((SRC / 'site-config.json').read_text())
+APP_STORE_BADGE = SRC / 'brand' / 'app-store-badge.svg'
+APP_STORE_URL_PATTERN = r'^https://apps\.apple\.com/[a-z]{2}/app/[a-z0-9-]+/id\d+(\?.*)?$'
+
+
+def store_cta() -> str:
+    """Before launch: the coming-soon status, with no inactive button. After: Apple's badge."""
+    dk = CONFIG['duskfold']
+    if not dk.get('available_on_app_store'):
+        return '<p class="store-cta"><span class="status">Coming soon to the App Store</span></p>'
+    url = dk.get('app_store_url', '')
+    if not re.match(APP_STORE_URL_PATTERN, url):
+        raise SystemExit('site-config.json: app_store_url must be the public App Store listing (https://apps.apple.com/…)')
+    if not APP_STORE_BADGE.exists():
+        raise SystemExit("Add Apple's official badge as src/brand/app-store-badge.svg before switching availability on")
+    return (
+        f'<p class="store-cta"><a class="store-badge" href="{url}">'
+        '<img src="/assets/brand/app-store-badge.svg" width="160" height="54" alt="Download Duskfold on the App Store" /></a></p>'
+    )
 
 
 def front_matter(text: str) -> tuple[dict[str, str], str]:
@@ -57,13 +76,14 @@ def render(layout: str, meta: dict[str, str], body: str) -> str:
         'logo_hero': LOGO_HERO,
         'duskfold_mark': DUSKFOLD_MARK,
         'seal_green': SEAL_GREEN,
-        'seal_ivory': SEAL_IVORY,
-        'founder_figure': (
-            '<figure class="portrait"><img src="/assets/brand/founder-portrait.jpg" width="800" height="1000" '
-            'alt="Sophie Jordan, founder of Digby House" loading="lazy" /></figure>'
-            if PORTRAIT.exists()
-            else f'<div class="portrait-alt">{SEAL_IVORY}</div>'
+        'duskfold_store_cta': store_cta(),
+        'dk_status': (
+            'Available on the App Store'
+            if CONFIG['duskfold'].get('available_on_app_store')
+            else 'Coming soon to the App Store'
         ),
+        'seal_ivory': SEAL_IVORY,
+        'founder_figure': f'<div class="portrait-alt">{SEAL_IVORY}</div>',
         'today': date.today().strftime('%-d %B %Y'),
     }
     for key in NAV_KEYS:
@@ -88,10 +108,6 @@ def images() -> None:
     for f in (SRC / 'brand').iterdir():
         if f.suffix in ('.png', '.svg') and not f.name.endswith('-source.png'):
             shutil.copy(f, brand_out / f.name)
-    if PORTRAIT.exists():
-        im = Image.open(PORTRAIT).convert('L')
-        im.thumbnail((800, 1000), Image.LANCZOS)
-        im.save(brand_out / 'founder-portrait.jpg', quality=82, optimize=True, progressive=True)
 
     # Favicons from the brand board's Digby app icon.
     icon = Image.open(SRC / 'brand' / 'digby-app-icon-source.png').convert('RGB')
@@ -105,6 +121,26 @@ def images() -> None:
     logo = logo.resize((720, round(logo.height * 720 / logo.width)), Image.LANCZOS)
     share.alpha_composite(logo, ((1200 - logo.width) // 2, (630 - logo.height) // 2 - 10))
     share.convert('RGB').save(SITE / 'assets' / 'img' / 'share.png', optimize=True)
+
+
+def fingerprint() -> None:
+    """Adds ?v=<content hash> to every asset address, so an updated file is never served stale."""
+    import hashlib
+
+    def version(path: str) -> str:
+        f = SITE / path.lstrip('/')
+        return hashlib.sha256(f.read_bytes()).hexdigest()[:10] if f.is_file() else ''
+
+    def tag(m: re.Match) -> str:
+        path = m.group(2)
+        v = version(path)
+        return f'{m.group(1)}{path}?v={v}' if v else m.group(0)
+
+    pattern = r'((?:href|src)="|, |srcset=")(/(?:assets/[^"\s,?]+|favicon\.[a-z]+|apple-touch-icon\.png))'
+    for page in SITE.rglob('*.html'):
+        page.write_text(re.sub(pattern, tag, page.read_text()))
+    css = SITE / 'assets' / 'site.css'
+    css.write_text(re.sub(r"(url\(')(/assets/[^')?]+)", tag, css.read_text()))
 
 
 def relative_copy(dest: Path) -> None:
@@ -164,6 +200,7 @@ def main() -> None:
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>\n'
     )
     images()
+    fingerprint()
     print(f'Built {len(pages) + 1} pages into {SITE}')
     if '--preview' in __import__('sys').argv:
         relative_copy(ROOT / 'preview')

@@ -23,7 +23,7 @@ class Blocks(HTMLParser):
             self.depth += 1
             if tag in ('p', 'li', 'h2', 'h3') and self.blocks[-1][1]:
                 self.blocks[-1][1].append('\n')
-        elif a.get('data-copy') in ('proposed', 'board'):
+        elif a.get('data-copy') == 'proposed':
             self.depth = 1
             self.blocks.append((a['data-copy'], []))
 
@@ -40,7 +40,7 @@ class Blocks(HTMLParser):
 
 
 out = ['# Website copy for approval', '',
-       'Generated from the site source by `tools/copy-sheet.py`. **Proposed** passages are new copy that needs your approval, or your agreed copy instead. **Brand board** passages are taken from the Digby brand board.', '']
+       'Generated from the site source by `tools/copy-sheet.py`. These are the only passages not yet approved: the website-specific privacy notice and website terms. Everything else on the site is the founder\'s approved copy.', '']
 n = 0
 for page in sorted((ROOT / 'src' / 'pages').rglob('*.html')):
     p = Blocks()

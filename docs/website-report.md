@@ -1,128 +1,130 @@
-# Digby House website: final branding and content pass (26 November 2026)
+# Digby House website: final amendments (26 November 2026)
 
-**Status:** built and tested; **not published**. No DNS records, hosting settings or email settings have been touched. Duskfold's app code is unchanged.
+**Status:** ready to publish once the two remaining approvals below are given. **Not published.** No DNS, hosting or email settings have been touched; the Duskfold app is unchanged.
 
-## 1. What changed in this pass
+## 1. Done in this package
 
-### Digby branding
+- **Copy:** your copy is used exactly on Home, About and the Duskfold page, and in the Contact and Our Products lines.
+  - The quote "Good tools don't just solve problems…" is removed.
+  - The product heading, the screenshots, the navigation and the three principles are kept.
+- **Founder:** the introduction and role ("Founder of Digby House Ltd") are shown beside the Digby publisher's seal. There is no photograph; that requirement is withdrawn.
+- **Mobile footer:**
+  - the two link lists sit side by side, with the brand and company details across the width;
+  - the spacing is reduced throughout;
+  - every link still has a comfortable tap area.
+- **App Store spots (four), controlled by one setting** in `src/site-config.json`. The spots are:
+  - the homepage Duskfold feature;
+  - the top of the Duskfold page;
+  - the bottom of the Duskfold page ("Make a little space for yourself.");
+  - the products card.
 
-- **Green:** now **#263A31**, a deep heritage green.
-  - The brand board's rendered greens measure about #283C31 (app icon, splash screen, quote panel, palette swatch). The board's label "#214C3D" is brighter than what it shows.
-  - The footer uses a deeper #1F2F28.
-  - Ivory (#F7F4EE) and green still alternate in roughly equal measure.
-- **Official artwork,** lifted from the brand board rather than redrawn: each mark is separated from the board's ivory background into a transparent PNG, in green and in ivory (`src/brand/`). It appears as:
-  - the **master logo** (ornament, DIGBY, rule), large on the home page (up to 640 px wide);
-  - the **wordmark** in the header, and the master logo in ivory in the footer;
-  - the **publisher's mark** (DIGBY · D · THOUGHTFULLY MADE seal) with the principles on Home and About;
-  - the **favicon and home-screen icon**, from the board's Digby app icon;
-  - the **sharing image**, from the master logo.
-- **Quality note:** the board is 1536 × 1024 px, so the master logo source is only about 300 px wide. It looks good at normal sizes but slightly soft on high-resolution screens. **The original vector or high-resolution logo files would make it crisp.** This is not a blocker.
+  Before launch they show "Coming soon to the App Store", with no inactive buttons. At launch, setting the listing URL and adding Apple's official badge switches all four, and the page descriptions, at once. This was tested in a throwaway copy: the build refuses a missing or non-App-Store URL and a missing badge. Activation is now step 9a of Duskfold's release checklist.
+- **Caching:** every image, font and stylesheet address now carries a content fingerprint, so an updated file is fetched immediately despite the cache rules in `.htaccess`. Pages are never cached.
+- **Unchanged:** the #263A31 green, the ivory, the typography, the layout, and the Duskfold presentation.
 
-### Duskfold imagery: current app, real flow
+## 2. Screenshot confirmation
 
-- **The latest app is the only source.** All five screens were captured from the current implemented app (branch `claude/trusting-cannon-m5bh6b`, commit `edbd637`), walking its real flow: Unload → Sort → Reflect → Let it drift → Rest.
-- **Genuine reflection:**
-  - The **Reflect** screen shows **genuine Duskfold AI output** recorded in Stage R3 on 24 November (test evening e1-10, fictional).
-  - Only the evening's two non-sensitive thoughts are used: a work proposal, and a postponed visit to family. The child-related thoughts were left out.
-  - The reflections and the "one thing for tomorrow" suggestion are exactly as recorded.
-  - The Unload text is a lightly trimmed excerpt of that test's fictional entry. Sort shows the two thoughts as the app separated them.
-  - No AI was called: the browser answered the app's requests with the recorded results. No paid testing.
-- **Removed:**
-  - the app's Home screen, which still shows the earlier four-step card and the earlier tagline;
-  - every earlier description and the "Settle/Fold" names.
-  The site now uses only the current five-stage names and approved screen wording.
-- **Frames:** iPhone frames are drawn in CSS, so they are crisp at any size and add no image weight.
-- **Duskfold mark:** the approved vector from D-144 (`duskfold/assets/images/brand/duskfold-mark.svg`), not the app's provisional traced drawing.
+- **Current app:** all five screens were captured from app commit `edbd637`. Since then, no app code, server code or assets have changed; only a checklist document has.
+- **Fictional content only:** the Unload entry and the two sorted thoughts come from the fictional test evening e1-10. The two reflections are genuine Duskfold output from that test.
+- **Disclosures kept:** "Screens from the Duskfold app, shown with a fictional entry" and "These reflections are genuine Duskfold output from a test evening written with fictional content".
 
-### Content
+## 3. Product descriptions against the current app: two to flag
 
-- **From the brand board** (treated as agreed):
-  - the company introduction ("We create simple, meaningful tools that help people understand themselves, build stronger relationships and create lasting change.");
-  - the three principles;
-  - the tagline;
-  - "Good tools don't just solve problems. They change lives."
-- **Not used:** the board's earlier Duskfold lines "Evening tools for a calmer mind" and "A calmer end to your day … evidence-informed tools". They are superseded, and "evidence-informed" is an unsupported claim.
-- **Everything else** is **proposed copy**, checked against the current app: 22 passages, all in `docs/copy-for-approval.md`.
-- **Company details** as confirmed. "Registered in England and Wales" is now stated without a marker: a company number of eight digits with no letter prefix is an England and Wales registration.
-- **MailerLite button removed.**
-- **Privacy notice:**
-  - The open items are now proposals: OVHcloud server logs are described by their purpose; enquiry emails are kept up to two years (your decision); the date fills in automatically when the site is built.
-  - The MailerLite section was removed with the button.
+The app has not been changed. Everything else in your Duskfold copy matches the app:
 
-## 2. What genuinely prevents publication
+- the separate thoughts in Sort;
+- a reflection on each chosen thought, plus one optional small step for tomorrow;
+- the boats drifting across the water;
+- the optional short meditation in Rest;
+- the journal kept on the device;
+- 18 and over.
 
-1. **Copy approval.** Approve the 22 proposed passages in `docs/copy-for-approval.md`, including the privacy notice and the two-year email retention, or send your agreed copy. Approval is one step: I mark them approved, and `tools/check.py --release` then passes.
-2. **Going live.** This needs your approval:
-   - upload to the OVHcloud hosting;
-   - SSL active;
-   - DNS checked so that email is unaffected (§6).
+1. **"Write or speak freely" (01 Unload).**
+   - Speech input is built into the app (on-device recognition, D-127), but it has **not yet been verified on a real iPhone**. That is checklist §6, a launch requirement.
+   - The wording is accurate if that verification passes before launch. If speech were dropped, the line would need to change.
+2. **"When you choose to use AI…" (privacy section).**
+   - In the app, agreeing to AI processing is a condition of beginning new evenings. Without it, you can read earlier evenings but can't start a new one.
+   - So AI is a one-time choice to use Duskfold, not a per-use option. "When you use Duskfold's AI features" or "When you agree to AI processing" would match the app exactly.
+   - Your decision; the text is unchanged.
 
-Nothing else blocks the website.
+## 4. Remaining approvals (short list)
 
-**Would improve it but don't block it:**
+| #   | Item                                                                                                                                                                                                                                                                                                                                                                                            | Blocks publication?                                       |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| 1   | **Website privacy notice** (`/privacy`, in `copy-for-approval.md`), including the **proposed 12 months' retention** for ordinary enquiry emails after the conversation closes. It is kept longer only for a complaint, legal claim or legal obligation.                                                                                                                                        | **Yes:** approve or amend                                 |
+| 2   | **Website terms** (`/legal`, five short points)                                                                                                                                                                                                                                                                                                                                                 | **Yes:** approve or amend                                 |
+| 3   | **Jurisdiction:** the site says "registered in England and Wales". The company number's format supports this (eight digits, no SC/NI prefix), but Companies House could not be reached from here. Open find-and-update.company-information.service.gov.uk/company/17570148 and confirm the registered office and "England/Wales". | Ten-second check, before upload                           |
+| 4   | Official Digby logo files, when available                                                                                                                                                                                                                                                                                                                                                      | No: drop them into `src/brand/` with the same names       |
 
-- **Original logo files** (vector or high resolution), for crisper logos.
-- **The founder photograph.** The About page works without it and shows the publisher's mark in its place. To add the photo, place `founder-portrait.jpg` in `src/brand/` and rebuild; the page switches automatically and shows it in black and white.
-- **The live MailerLite link,** if you'd like the early-access button back.
+**What the privacy review established:**
 
-**Files mentioned but not received in this conversation:** the separate logo documents, the founder photograph and the agreed website copy. Only the brand board image arrived.
+| Point                     | Finding                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Email                     | OVHcloud email in European datacentres: confirmed from OVHcloud's own documents (D-159).                                                                                                                                                                                                                                                                                                                                     |
+| Hosting logs              | OVHcloud publishes **no fixed retention period** for web hosting logs, so the notice states none and doesn't claim one. If you'd like a period stated, ask OVHcloud support and add it.                                                                                                                                                                                                                                      |
+| Lawful bases              | Hosting and security logs, and replying to enquiries: **legitimate interests** (UK GDPR Art. 6(1)(f)).                                                                                                                                                                                                                                                                                                                      |
+| Rights                    | Access, rectification, erasure, restriction and objection, plus portability "in some circumstances". A one-month response. The ICO complaint route (website and helpline) is stated without asking people to come to us first.                                                                                                                                                                                             |
+| No cookies or tracking    | Verified in this build: no scripts, and **0 cookies and 0 browser storage** after visiting every page at all three widths; no third-party requests. The live server's response headers can only be checked after upload (§6, step 6).                                                                                                                                                                                      |
+| No unverified claims      | No "anonymous" description of app accounts, and no AI-provider retention claims. No legal or regulatory clearance is claimed. The urgent-support limitation stays on Contact and Support.                                                                                                                                                                                                                                   |
 
-## 3. Publishing the website now vs releasing Duskfold later
+## 5. Testing (all 10 pages; desktop 1440 px, phone 390 px and narrow 360 px)
 
-| Requirement                                      | Website now (company site, product "coming soon")                                                        | Duskfold release (later)                                                                        |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Company details (Companies Act trading disclosure) | **Shown on every page**                                                                                  | Same                                                                                            |
-| Privacy information                              | **Website notice** (this site and email only): approve the proposed text                                | Duskfold Privacy Policy (`public-pages.md`), with the legal gate D-129 to close                 |
-| Terms                                            | Short website terms on `/legal` (proposed)                                                               | Duskfold Terms of Use, with open items (licence agreement, liability, usage-limit changes)      |
-| Support page                                     | Holding page at `/support`                                                                               | Full Duskfold support text                                                                      |
-| Safety and urgent-help wording                   | **Not published.** Only "not an emergency service; call 999"                                             | Independent clinical review (D-40), which is unchanged                                          |
-| Claims                                           | Says "coming soon"; no App Store link; no outcome claims; "designed so that…" for privacy               | App Store listing review; claims verified (D-17)                                                |
-| ICO fee                                          | Website alone: enquiry email and server logs                                                             | Reassess before live customer data (D-155)                                                      |
-| Cookies and consent                              | None set, so no banner needed                                                                            | n/a                                                                                             |
+- **Accessibility:** axe-core reports **0 violations**. Keyboard focus is visible at every stop.
+- **Layout and loading:** no horizontal overflow; every image loads.
+- **Privacy:** no external requests, no console errors, no cookies, no storage.
+- **Links and pages:** all internal links and files resolve. Each page has a title, a description and a single main heading.
+- **Folder preview:** opens from disk with every linked page, image and font.
+- **Size:** 1.15 MB in total, about 1.1% of the 100 MB allowance.
 
-All Duskfold release gates are unchanged. The website states plainly that Duskfold is not yet available. It does not imply that clinical or legal reviews are complete.
+## 6. Publication steps (after approval)
 
-## 4. Testing (all 10 pages; desktop 1440 px, phone 390 px and narrow 360 px)
+**1. Protect email first**
 
-| Check                                                    | Result                                     |
-| -------------------------------------------------------- | ------------------------------------------ |
-| axe-core 4.10 accessibility rules                        | **0 violations**                           |
-| Keyboard Tab order, visible focus ring at every stop     | Pass                                       |
-| Horizontal overflow                                      | None                                       |
-| Every image loads (after scrolling)                      | Pass                                       |
-| Requests to other websites; console errors               | None; none                                 |
-| Internal links, files, titles, descriptions, one h1, `lang` | Pass (`tools/check.py`)                  |
-| Folder preview opened from disk                          | All linked pages, images and fonts load    |
+1. OVHcloud Control Panel → **Web Cloud → Domain names → digbyhouse.co.uk → DNS zone**.
+2. Screenshot the whole zone. Note especially every **MX** record (where mail is delivered), **TXT** records containing `v=spf1` or DKIM keys, and any **CNAME** or **SRV** records for autodiscover or mail.
+3. **Change none of them.**
 
-**Not tested:**
+**2. Check the hosting**
 
-- Safari or real phones (your check);
-- the live server (HTTPS, `.htaccess`), until upload.
+1. **Web Cloud → Hosting plans:** confirm the free 100 MB plan is active for digbyhouse.co.uk.
+2. If activating it changed the DNS zone, compare the MX and TXT records with your screenshot. If they differ, stop and contact OVHcloud support before going further.
 
-## 5. Size
+**3. Upload**
 
-- **Total upload:** 1.1 MB, about 1% of the 100 MB allowance. Fonts 87 KB; screenshots 700 KB; brand artwork about 240 KB; the rest under 60 KB.
-- No scripts, no frameworks and no third-party requests.
+1. Get the FTP details from the activation email, or from **Hosting plans → FTP-SSH**.
+2. In **FileZilla**: File → Site Manager. Enter the host, port 21, encryption "Require explicit FTP over TLS", and your username and password.
+3. Turn on Server → **Force showing hidden files**, so `.htaccess` uploads too.
+4. Open the **`www`** folder on the right. Delete only OVHcloud's placeholder page.
+5. Drag in the **contents** of the `site/` folder, not the folder itself.
 
-## 6. Uploading to OVHcloud without affecting email
+**4. Turn on HTTPS**
 
-The upload steps are unchanged from the 25 November report.
+1. **Hosting plans → General information → SSL certificate**: if it isn't active, order the free **Let's Encrypt** certificate.
+2. Under **Multisite**, make sure both `digbyhouse.co.uk` and `www.digbyhouse.co.uk` are listed with **SSL enabled**.
+3. Allow a few hours. It needs the domain to point to the hosting already.
+4. When **https://www.digbyhouse.co.uk** shows a padlock, open `.htaccess` in a text editor and remove the `#` from the four lines under "STEP 2". Save and re-upload it.
+5. Check that `http://digbyhouse.co.uk` and `http://www.digbyhouse.co.uk` both end up at **https://www.digbyhouse.co.uk**. If anything shows an error, re-upload the original `.htaccess`.
 
-1. **Protect email first.** In the Control Panel, open Domain names → digbyhouse.co.uk → DNS zone. Note every MX, TXT, CNAME and SRV record, and change none of them.
-2. **Check the hosting.** Confirm the free 100 MB plan is active on the domain. If its activation altered the DNS zone, compare the MX records with your notes, and stop if they differ.
-3. **Upload.** Using FileZilla with the hosting's FTP details:
-   - upload the **contents** of `site/` into `www`, including the hidden `.htaccess`;
-   - remove OVHcloud's placeholder page.
-4. **HTTPS.**
-   - Enable Let's Encrypt SSL for `digbyhouse.co.uk` and `www.digbyhouse.co.uk`.
-   - Once the padlock shows, remove the `#` from the four "STEP 2" lines in `.htaccess` and re-upload it.
-5. **Test.** Check every page on a phone. Send email both ways. Recheck the MX records.
+**5. Test the site**
 
-## 7. Before resubmitting Apple Developer enrolment
+On your phone and computer, open every page. Check the menu, the footer links, the email links and the Duskfold page images.
 
-1. ☐ Copy approved, and `python3 tools/check.py --release` passes.
-2. ☐ Site live at https://www.digbyhouse.co.uk, with the plain domain redirecting to it.
-3. ☐ The legal name on the site, "Digby House Ltd", matches the D‑U‑N‑S record and the enrolment form exactly.
-4. ☐ You enrol with an email address at digbyhouse.co.uk, with authority to bind the company.
-5. ☐ Email still works.
-6. ☐ The site says Duskfold is coming soon, with no App Store link.
+**6. Check for cookies (one minute)**
+
+1. In Chrome on your computer, open the site and press **F12 → Application → Cookies**. It should be empty.
+2. Then open **Network**, reload, click the first request, and look under **Response Headers**: there should be no `set-cookie`.
+3. If OVHcloud adds one, tell me before relying on the privacy notice's "no cookies" line.
+
+**7. Test email**
+
+1. From a personal address (for example Gmail), send a message to hello@digbyhouse.co.uk and check it arrives.
+2. Reply from hello@digbyhouse.co.uk and check the reply arrives back.
+3. Recheck the DNS zone against your screenshot.
+
+## 7. Apple Developer enrolment (after publication)
+
+1. ☐ Site live at https://www.digbyhouse.co.uk, every page working.
+2. ☐ The legal name on the site, "Digby House Ltd", matches the D‑U‑N‑S record and the enrolment form exactly.
+3. ☐ You enrol with an email address at digbyhouse.co.uk, with authority to bind the company.
+4. ☐ Email works in both directions.
+5. ☐ The site says Duskfold is coming soon, with no App Store link (correct until launch).

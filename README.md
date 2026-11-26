@@ -28,15 +28,23 @@ node tools/browser-test.js <url> <screenshot-dir> <axe.min.js>   # screenshots, 
 
 ## Copy status and interim content
 
+- `data-copy="approved"`: the founder's approved copy.
 - `data-copy="proposed"`: copy awaiting the founder's approval (listed in `docs/copy-for-approval.md`, made by `python3 tools/copy-sheet.py`). On approval, change it to `data-copy="approved"`.
-- `data-copy="board"`: copy taken from the Digby brand board.
 - `data-draft`, `data-missing`, `data-interim` and `[OUTSTANDING: …]` are older interim markers; none remain.
 
 `tools/check.py --release` fails while any proposed or interim content remains, so nothing unapproved can be published.
 
 ## Brand artwork
 
-`src/brand/` holds the Digby master logo, wordmark and publisher's mark, lifted from the brand board as transparent PNGs in green and ivory, plus the board's app icon (favicon source) and the approved Duskfold mark (SVG). To use higher-resolution originals, replace the PNGs with the same names. To show the founder photograph on About, add `src/brand/founder-portrait.jpg`.
+`src/brand/` holds the Digby master logo, wordmark and publisher's mark, lifted from the brand board as transparent PNGs in green and ivory, plus the board's app icon (favicon source) and the approved Duskfold mark (SVG). When the official logo files arrive, replace the PNGs with the same names and rebuild; cache-busting addresses make visitors receive the new files at once.
+
+## App Store availability (one setting)
+
+`src/site-config.json` holds Duskfold's App Store status and listing URL. Before launch every App Store spot shows "Coming soon to the App Store" (no inactive buttons). At launch: set `available_on_app_store` to `true`, add the listing URL and Apple's official badge as `src/brand/app-store-badge.svg`, and rebuild. The build refuses a missing badge or a URL that is not an App Store listing. The spots are the homepage Duskfold feature, the top and bottom of the Duskfold page, and the products card.
+
+## Caching
+
+Every asset address carries a content fingerprint (`?v=…`), added by the build, so changed files are fetched at once even though `.htaccess` lets browsers cache assets. Pages themselves are never cached.
 
 ## Adding a product later
 

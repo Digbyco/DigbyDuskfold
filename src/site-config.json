@@ -1,0 +1,7 @@
+{
+  "duskfold": {
+    "available_on_app_store": false,
+    "app_store_url": "",
+    "_notes": "At Duskfold's launch: set available_on_app_store to true, paste the public App Store listing URL (https://apps.apple.com/gb/app/...), and add Apple's official 'Download on the App Store' badge (black, from Apple's Marketing Resources) as src/brand/app-store-badge.svg. Every App Store spot on the site then shows the badge, linking to the listing. The build refuses a missing URL or badge."
+  }
+}

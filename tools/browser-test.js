@@ -53,7 +53,7 @@ const axe = fs.readFileSync(axePath, 'utf8');
       }
       results.push({ view: label, path, status, overflow, violations, focus, brokenImages });
     }
-    results.push({ view: label, external: [...external], errors });
+    results.push({ view: label, external: [...external], errors, cookies: (await ctx.cookies()).length, storage: await p.evaluate(() => localStorage.length + sessionStorage.length) });
     await ctx.close();
   }
   await b.close();

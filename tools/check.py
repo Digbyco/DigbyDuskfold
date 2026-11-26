@@ -136,7 +136,7 @@ def main() -> int:
 
     css = (SITE / 'assets' / 'site.css').read_text()
     for url in re.findall(r'url\((["\']?)([^)"\']+)\1\)', css):
-        if url[1].startswith('http') or (not url[1].startswith('data:') and not target(url[1]).exists()):
+        if url[1].startswith('http') or (not url[1].startswith('data:') and not target(urlparse(url[1]).path).exists()):
             faults.append(f'site.css: bad url {url[1]}')
 
     total = sum(f.stat().st_size for f in SITE.rglob('*') if f.is_file())
