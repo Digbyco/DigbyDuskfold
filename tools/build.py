@@ -21,7 +21,9 @@ ORIGIN = 'https://www.digbyhouse.co.uk'
 # Official Digby artwork, lifted from the brand board (src/brand/; see docs/website-report.md).
 LOGO_SMALL = '<img class="logo-header" src="/assets/brand/digby-wordmark-green.png" width="148" height="29" alt="Digby" />'
 LOGO_FOOTER = '<img class="logo-footer" src="/assets/brand/digby-master-logo-ivory.png" width="225" height="96" alt="Digby" />'
-LOGO_HERO = '<img class="logo-master" src="/assets/brand/digby-master-logo-green.png" width="900" height="384" alt="Digby" />'
+# The homepage master logo is a vector traced from the same artwork (same box, colour and spacing),
+# so it stays sharp at its large size.
+LOGO_HERO = '<img class="logo-master" src="/assets/brand/digby-master-logo-green.svg" width="900" height="384" alt="Digby" />'
 SEAL_GREEN = '<img class="seal" src="/assets/brand/digby-publishers-mark-green.png" width="402" height="405" alt="" loading="lazy" />'
 SEAL_IVORY = '<img class="seal" src="/assets/brand/digby-publishers-mark-ivory.png" width="402" height="405" alt="" loading="lazy" />'
 
