@@ -26,16 +26,17 @@ python3 tools/check.py --release    # as above, and refuses while any interim co
 node tools/browser-test.js <url> <screenshot-dir> <axe.min.js>   # screenshots, axe, keyboard, overflow
 ```
 
-## Interim content
+## Copy status and interim content
 
-Until the founder supplies the brand board, the agreed copy and the portrait, the preview marks:
+- `data-copy="proposed"`: copy awaiting the founder's approval (listed in `docs/copy-for-approval.md`, made by `python3 tools/copy-sheet.py`). On approval, change it to `data-copy="approved"`.
+- `data-copy="board"`: copy taken from the Digby brand board.
+- `data-draft`, `data-missing`, `data-interim` and `[OUTSTANDING: …]` are older interim markers; none remain.
 
-- `data-draft="…"`: interim copy (shown with a dashed orange outline);
-- `data-missing="…"`: a missing asset (dashed blue outline);
-- `data-interim="…"`: the interim typographic wordmark in the header and footer;
-- `[OUTSTANDING: …]`: facts still to confirm.
+`tools/check.py --release` fails while any proposed or interim content remains, so nothing unapproved can be published.
 
-`tools/check.py --release` fails while any of these remain, so the site cannot be published by mistake.
+## Brand artwork
+
+`src/brand/` holds the Digby master logo, wordmark and publisher's mark, lifted from the brand board as transparent PNGs in green and ivory, plus the board's app icon (favicon source) and the approved Duskfold mark (SVG). To use higher-resolution originals, replace the PNGs with the same names. To show the founder photograph on About, add `src/brand/founder-portrait.jpg`.
 
 ## Adding a product later
 

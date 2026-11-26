@@ -6,8 +6,9 @@
 
 Faults: broken internal links or images, resources loaded from other sites, pages without a
 title, description, h1 or lang, images without alt text, scripts, a package over 100 MB.
-Interim content (refused with --release): data-draft copy, data-missing assets, data-interim
-logos and [OUTSTANDING: ...] notes.
+Interim content (refused with --release): data-copy="proposed" (copy awaiting the founder's
+approval), data-draft copy, data-missing assets, data-interim logos and [OUTSTANDING: ...] notes.
+data-copy="board" marks copy taken from the brand board and is not interim.
 """
 from __future__ import annotations
 
@@ -124,6 +125,7 @@ def main() -> int:
             elif not target(u.path).exists():
                 faults.append(f'{rel}: missing file {src}')
         for kind, pattern in (
+            ('copy awaiting approval', r'data-copy="(proposed)"'),
             ('draft copy', r'data-draft="([^"]+)"'),
             ('missing asset', r'data-missing="([^"]+)"'),
             ('interim logo', r'data-interim="([^"]+)"'),

@@ -18,6 +18,10 @@ const axe = fs.readFileSync(axePath, 'utf8');
     p.on('pageerror', (e) => errors.push(String(e)));
     for (const path of PAGES) {
       const res = await p.goto(base + path, { waitUntil: 'networkidle' });
+      // Scroll through so lazily loaded images are in place, as for a visitor.
+      await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 50)); } window.scrollTo(0, 0); });
+      await p.waitForLoadState('networkidle');
+      const brokenImages = await p.evaluate(() => [...document.images].filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.getAttribute('src')));
       const status = res.status();
       const overflow = await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       const name = (path.replace(/\//g, '_').replace(/^_|_$/g, '') || 'home').replace('.html', '');
@@ -47,7 +51,7 @@ const axe = fs.readFileSync(axePath, 'utf8');
         }
         focus = { stops: seen.length, withoutOutline: seen.filter((f) => !f.outline || !f.visible).map((f) => `${f.tag} ${f.text}`) };
       }
-      results.push({ view: label, path, status, overflow, violations, focus });
+      results.push({ view: label, path, status, overflow, violations, focus, brokenImages });
     }
     results.push({ view: label, external: [...external], errors });
     await ctx.close();

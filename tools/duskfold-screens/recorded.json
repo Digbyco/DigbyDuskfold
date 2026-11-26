@@ -1,0 +1,64 @@
+{
+ "reflection": {
+  "display_text": "What may be making this feel so crushing is the speed of it: one message lands, and the whole weekend instantly starts to feel already spent. 'Restructured by Monday' is broad enough that your mind can only fill in the largest version of the job before you've even had a chance to work out what is actually being asked.\n\nWhat may make this sting is not only missing Tom's parents, but the way the client email seems to have taken over the weekend before the two of you could really choose. Tom being lovely about it does not cancel the disappointment; if anything, it can leave you carrying it more quietly.",
+  "response_mode": "reflection",
+  "insights": [
+   {
+    "kind": "distinction",
+    "summary": "The deadline is making the whole weekend feel consumed before the scope is clear.",
+    "grounding": [
+     "there was a message from the client saying they want the whole proposal restructured by Monday.",
+     "That's my weekend gone"
+    ],
+    "is_tentative": true
+   },
+   {
+    "kind": "connection",
+    "summary": "The hurt here may be less about changed plans on their own and more about work overruling family time, with Tom's kindness making the disappointment quieter rather than smaller.",
+    "grounding": [
+     "there was a message from the client saying they want the whole proposal restructured by Monday. That's my weekend gone, and we'd planned to see Tom's parents.",
+     "Tom was lovely about it and said we can go another time, but I could tell he was disappointed."
+    ],
+    "is_tentative": true
+   }
+  ],
+  "continuity_source_ids": [],
+  "intention_suggestions": [
+   {
+    "action": "Spend five minutes noting what the client has explicitly asked to change, and what the rest of your mind is assuming, so the job has clearer edges before bed.",
+    "when_or_trigger": "If it would help take some of the size out of it tonight",
+    "concern_id": "2"
+   }
+  ],
+  "safety_status": "ordinary",
+  "sections": [
+   {
+    "concern_id": "2",
+    "display_text": "What may be making this feel so crushing is the speed of it: one message lands, and the whole weekend instantly starts to feel already spent. 'Restructured by Monday' is broad enough that your mind can only fill in the largest version of the job before you've even had a chance to work out what is actually being asked."
+   },
+   {
+    "concern_id": "3",
+    "display_text": "What may make this sting is not only missing Tom's parents, but the way the client email seems to have taken over the weekend before the two of you could really choose. Tom being lovely about it does not cancel the disappointment; if anything, it can leave you carrying it more quietly."
+   }
+  ]
+ },
+ "extraction": {
+  "needs_user_clarification": false,
+  "concerns": [
+   {
+    "id": "2",
+    "short_label": "Restructuring the proposal",
+    "source_excerpt": "there was a message from the client saying they want the whole proposal restructured by Monday. That's my weekend gone",
+    "editable_text": "The client wants the whole proposal restructured by Monday, and I'm worried it will take up my weekend.",
+    "confidence": 0.99
+   },
+   {
+    "id": "3",
+    "short_label": "Missing the visit to Tom's parents",
+    "source_excerpt": "we'd planned to see Tom's parents. Tom was lovely about it and said we can go another time, but I could tell he was disappointed.",
+    "editable_text": "We had planned to see Tom's parents, but the proposal deadline means we may have to go another time. I could tell Tom was disappointed.",
+    "confidence": 0.95
+   }
+  ]
+ }
+}

@@ -37,12 +37,12 @@
 :root {
   /* Digby palette (brief §3) */
   --ivory: #f7f4ee;
-  --forest: #214c3d;
+  --forest: #263a31; /* deep heritage green, as rendered on the brand board */
   --slate: #7f8f97;
   --clay: #dbb6a6;
   --charcoal: #2e322f;
   /* Derived for text contrast */
-  --forest-deep: #1a3d31;
+  --forest-deep: #1f2f28;
   --ivory-soft: #efeae0;
   --slate-text: #5d6b72; /* slate darkened to pass 4.5:1 on ivory */
   --ivory-on-forest: #e9e3d6;
@@ -172,7 +172,7 @@ p {
 /* Header */
 .site-header {
   background: var(--ivory);
-  border-bottom: 1px solid rgba(33, 76, 61, 0.15);
+  border-bottom: 1px solid rgba(38, 58, 49, 0.15);
 }
 .header-inner {
   display: flex;
@@ -243,6 +243,49 @@ p {
 }
 .logo-hero .wordmark {
   font-size: clamp(3.6rem, 12vw, 8.5rem);
+}
+
+/* Official Digby artwork */
+.logo-header {
+  height: 26px;
+  width: auto;
+}
+.logo-footer {
+  width: 180px;
+  height: auto;
+}
+.logo-master {
+  width: min(640px, 82vw);
+  height: auto;
+  margin: 0 auto;
+}
+.seal {
+  width: 132px;
+  height: auto;
+}
+.portrait-alt {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(233, 227, 214, 0.25);
+  border-radius: 4px;
+}
+.portrait-alt .seal {
+  width: 55%;
+}
+.section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.section-head .seal {
+  flex: none;
+}
+@media (max-width: 40rem) {
+  .section-head .seal {
+    width: 84px;
+  }
 }
 
 /* Sections */
@@ -412,6 +455,39 @@ p {
   padding: clamp(2rem, 5vw, 3.5rem);
 }
 
+.dk-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.actions {
+  margin-top: 1.75rem;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.after-list {
+  margin-top: 1.5rem;
+}
+.pull {
+  margin: 2.5rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--clay);
+  max-width: var(--measure);
+}
+.pull p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  line-height: 1.35;
+  color: var(--forest);
+  margin: 0;
+}
+
 /* Phone screenshots */
 .phones {
   display: grid;
@@ -425,10 +501,29 @@ p {
 .phone {
   margin: 0;
 }
-.phone img {
-  border-radius: 22px;
-  box-shadow: 0 18px 40px rgba(7, 17, 28, 0.35);
-  border: 1px solid rgba(217, 174, 120, 0.25);
+.iphone {
+  position: relative;
+  padding: 3.2%;
+  border-radius: 17% / 7.8%;
+  background: linear-gradient(145deg, #3a3f47 0%, #15181d 40%, #0b0d10 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 24px 48px rgba(7, 17, 28, 0.38);
+}
+.iphone img {
+  border-radius: 14.5% / 6.8%;
+}
+.iphone::after {
+  /* Dynamic Island */
+  content: '';
+  position: absolute;
+  top: 4.6%;
+  left: 50%;
+  width: 28%;
+  height: 3%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #050608;
 }
 .caption {
   font-size: 0.85rem;
@@ -485,6 +580,7 @@ p {
 }
 .stage-img {
   max-width: 15rem;
+  width: 100%;
   margin: 0 auto;
 }
 .stage-num {
@@ -538,7 +634,7 @@ p {
 }
 .card {
   background: #fff;
-  border: 1px solid rgba(33, 76, 61, 0.14);
+  border: 1px solid rgba(38, 58, 49, 0.14);
   border-radius: 18px;
   padding: 1.6rem;
 }
