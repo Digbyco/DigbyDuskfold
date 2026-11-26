@@ -1,6 +1,33 @@
-# Digby House website: final amendments (26 November 2026)
+# Digby House website: publication-ready (26 November 2026)
 
-**Status:** ready to publish once the two remaining approvals below are given. **Not published.** No DNS, hosting or email settings have been touched; the Duskfold app is unchanged.
+**Status:** **publication-ready.** `python3 tools/check.py --release` passes: no copy awaits approval and no placeholders remain. Not published. No DNS, hosting or email settings have been touched. The Duskfold app is unchanged, and its release requirements are separate (Duskfold release checklist).
+
+**Final decisions (26 November 2026):**
+
+- Website terms approved in principle.
+- 12-month retention for ordinary enquiry emails approved, and recorded as an operational duty in `docs/operations.md`. It matches Duskfold's ROPA P7.
+- The Duskfold page reads "When you agree to AI processing".
+- "Write or speak freely" is kept. Speech verified on a real iPhone is now an explicit Duskfold launch requirement (release checklist §6).
+
+**Privacy notice, finalised:**
+
+- dated 26 November 2026;
+- describes OVHcloud as processor under its data processing agreement;
+- email stored in OVHcloud's European datacentres;
+- possible group access from the EEA, the UK and Canada, which the UK recognises as adequate (from OVHcloud's DPA and sub-processor list, D-159);
+- hosting logs kept by OVHcloud only as long as it needs them to operate and secure the service; OVHcloud publishes no fixed period, so none is claimed.
+
+No independent legal approval is claimed.
+
+**`.htaccess` verified under Apache 2.4:**
+
+- syntax OK;
+- the 404 page is served;
+- security headers are sent and no cookie is set;
+- pages are never cached; fingerprinted assets are;
+- the STEP 2 HTTPS redirect, tested in a copy, sends both addresses to `https://www.digbyhouse.co.uk/…`.
+
+**Publication blockers: none.** One check to make before upload: confirm "registered in England and Wales" on the company's Companies House page. Companies House could not be reached from here.
 
 ## 1. Done in this package
 
